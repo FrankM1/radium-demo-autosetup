@@ -149,7 +149,6 @@ function rda_admin_page_content() {
 
                             foreach ( $value as $handler => $setting ) {
 
-                                qazana_write_log( $handler );
                                 ?><div class="import-<?php echo $importer; ?>-<?php echo $handler; ?>">
                                     <label for="import-<?php echo $importer; ?>-<?php echo $handler; ?>">
                                         <input type="checkbox" name="rda[import-<?php echo $importer; ?>-<?php echo $handler; ?>]" id="import-<?php echo $importer; ?>-<?php echo $handler; ?>" class="import-select import-<?php echo $importer; ?>-<?php echo $handler; ?>" class="import-select" value="1"/>
@@ -183,7 +182,7 @@ function rda_admin_page_content() {
             <?php wp_nonce_field( 'rda-admin' ); ?>
 
         </form>
- 
+
         <!-- #rda-admin-form -->
     </div><!-- .wrap -->
 <?php
