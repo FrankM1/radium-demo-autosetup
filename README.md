@@ -7,3 +7,7 @@ This plugin can be used to automatically generate data in WordPress for testing 
  - Portfolio
  - Featured Images
  - Woocommerce Products
+ - videos
+ - User Accounts
+ - Pages
+ - Cue Playlists
