@@ -93,8 +93,8 @@ function radium_unsplush_get_transient_remote_json( $query_id, $name, $page, $pe
 
     $stale_cache_name = 'stalecache_' . $transientname; // we generate a consistent name for the backup data
 
-     // delete_option( $stale_cache_name );
-     // delete_transient( $transientname );
+    // delete_option( $stale_cache_name );
+    // delete_transient( $transientname );
 
     if ( false === ( $json = get_transient( $transientname ) ) ) { // get the remote data as before, but this time...
 
@@ -140,14 +140,19 @@ function radium_unsplush_get_transient_remote_json( $query_id, $name, $page, $pe
                 update_option( $stale_cache_name, $json ); // update_option() preserves the 'autoload' setting of a previously created option.
             }
 
-        } catch (Exception $e) {
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        } catch ( Exception $e ) {
+            echo 'Caught exception: ', $e->getMessage(), "\n";
             $json = get_option( $stale_cache_name );
         }
 
         set_transient( $transientname, $json, 1800 );
         // Regardless of whether we got the data from the remote site or our local backup, we store that data in the transient.
         // We won't try to regenerate that data until the transient expires.
+    }
+
+    if ( ! json_decode( $json, true) ) {
+        delete_option( $stale_cache_name );
+        delete_transient( $transientname );
     }
 
     return $json;
